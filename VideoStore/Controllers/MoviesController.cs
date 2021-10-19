@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VideoStore.Models;
+using VideoStore.ViewModels;
 
 namespace VideoStore.Controllers
 {
@@ -12,33 +13,20 @@ namespace VideoStore.Controllers
         // GET: Movies/Random
         public ViewResult Random()
         {
-            var Movie = new Movie() { Id = 1, Name = "Shrek" };
-            return View(Movie);
-        }
-
-        public ActionResult Edit(int id)
-        {
-            return Content("id=" + id);
-        }
-        // Movies
-        public ActionResult Index(int? pageIndex, string sortBy)
-        {
-            if (!pageIndex.HasValue)
+            var movie = new Movie() { Name = "Shrek!" };
+            var customers = new List<Customer>
             {
-                pageIndex = 1;
-            }
+                new Customer { Name = "Customer 1" },
+                new Customer { Name = "Customer 2" }
+            };
 
-            if (String.IsNullOrWhiteSpace(sortBy))
+            var viewModel = new RandomMovieViewModel
             {
-                sortBy = "Name";
-            }
+                Movie = movie,
+                Customers = customers
+            };
 
-            return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
-        }
-
-        public ActionResult ByReleaseDate(int year, int month)
-        {
-            return Content(year + "/" + month);
+            return View(viewModel);
         }
     }
 }
