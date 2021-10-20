@@ -1,0 +1,30 @@
+﻿@model VideoStore.ViewModels.CustomerListViewModel
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var className = Model.Customers.Count > 0 ? "customer" : null;
+}
+
+<h2 class="@className">Customers</h2>
+
+
+@if (className == null)
+{
+
+    <p>No movies have been added to the database yet.</p>
+}
+else
+{
+
+    <div class="customers-list">
+        @foreach (var customer in Model.Customers)
+        {
+            <p>
+                @customer.Id: @customer.Name
+            </p>
+        }
+    </div>
+}

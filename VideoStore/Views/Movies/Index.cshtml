@@ -1,0 +1,28 @@
+﻿@model VideoStore.ViewModels.IndexMovieListViewModel
+
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var className = Model.Movies.Count > 0 ? "popular" : null;
+}
+
+<h2 class="@className">Movies</h2>
+
+@if (Model.Movies.Count == 0)
+{
+
+    <p>No movies have been added to the database yet.</p>
+}
+else
+{
+
+    <ul>
+        @foreach (var movie in Model.Movies)
+        {
+            <p>@movie.Id: @movie.Name</p>
+        }
+    </ul>
+}
